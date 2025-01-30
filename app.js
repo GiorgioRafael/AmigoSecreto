@@ -16,10 +16,21 @@ function adicionarAmigo(){
         console.log(listaAmigos)
         let novoAmigo = document.createElement('li');
         novoAmigo.textContent = nomeAmigo;
+        document.getElementById('amigo').value = '';
+        document.getElementById('amigo').focus()
         document.getElementById('listaAmigos').appendChild(novoAmigo);
     }
 }
+//criei um "listener" para que quando o usuario esteja digitando no campo de adicionar amigo 
+// e pressione enter, ele consiga adcionar um amigo
+document.getElementById('amigo').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        adicionarAmigo();
+    }
+});
 
+
+//funcao antiga que tentei implementar
 // function sortearAmigo(){
 //     if(listaAmigos.length >=2){
 //         let numeroSorteado = parseInt(Math.random() * listaAmigos.length +1)
@@ -44,7 +55,7 @@ function sortearAmigo(){
             document.getElementById('botaoSortear').disabled = true;
             return;
         }
-        
+
         let numeroSorteado;
         do {
             numeroSorteado = Math.floor(Math.random()* listaAmigos.length)
@@ -53,7 +64,7 @@ function sortearAmigo(){
 
             listaDeNumerosSorteados.push(numeroSorteado);
             console.log(listaDeNumerosSorteados)
-            exibirTexto('resultado', listaAmigos[numeroSorteado])
+            exibirTexto('resultado', `Seu amigo secreto é ${listaAmigos[numeroSorteado]}!`)
     } else {
         exibirTexto('subtitle', 'Adicione pelo menos 2 nomes')
     }
